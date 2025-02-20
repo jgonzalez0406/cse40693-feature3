@@ -1,16 +1,26 @@
-import { html } from "https://unpkg.com/htm/preact/standalone.module.js";
+import {
+  html,
+  render,
+} from "https://unpkg.com/htm/preact/standalone.module.js";
+import { AddExpenseForm } from "./Components/ExpenseForm/AddExpenseForm.js"; // Importing the child components
+import Navbar from "./Components/Navigation/NavBar.js";
 
-// Navbar Component
-export default function Navbar() {
+// App Component
+function App() {
+  function handleAddExpense() {
+    alert("Expense submitted");
+  }
+
   return html`
-    <nav>
-      <ul class="nav-list">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../register/register.html">Register</a></li>
-        <li><a href="../login/login.html">Login</a></li>
-        <li><a href="../dashboard/dashboard.html">Dashboard</a></li>
-        <li><a href="../add_expense/add_expense.html">Add Expense</a></li>
-      </ul>
-    </nav>
+    <div>
+      <${Navbar} />
+      <h1>Add a New Expense</h1>
+      <p>Please fill out the details below.</p>
+      <hr />
+      <${AddExpenseForm} onAddExpense=${handleAddExpense} />
+    </div>
   `;
 }
+
+// Render the App
+render(html`<${App} />`, document.getElementById("app"));
